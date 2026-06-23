@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handmade by Sue | Regalos personalizados y corporativos en Costa Rica</title>
+<meta name="description" content="Regalos artesanales y personalizados hechos en Costa Rica. Grabado láser, madera, bolsos y regalos corporativos con factura electrónica.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --olive:#545E3F;
+    --olive-dark:#3C4530;
+    --ink:#1F1B16;
+    --linen:#EFE9DC;
+    --linen-soft:#F6F2E8;
+    --gold:#B8862E;
+    --white:#FFFFFF;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--linen);
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    color:var(--ink);
+  }
+  a{color:var(--olive); text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:.6em;
+    display:inline-block;
+  }
+
+  /* ---------- Stitch line signature element ---------- */
+  .stitch-rail{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:2px;
+    height:100%;
+    transform:translateX(-50%);
+    z-index:0;
+    pointer-events:none;
+    opacity:.35;
+  }
+  .stitch-rail svg{height:100%; width:40px; display:block; margin:0 auto;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(239,233,220,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(31,27,22,0.08);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1100px; margin:0 auto;
+  }
+  .nav-logo img{height:42px;}
+  .nav-links{display:flex; gap:28px; align-items:center;}
+  .nav-links a{
+    color:var(--ink); font-weight:500; font-size:.95rem;
+    position:relative;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background:var(--gold); transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--olive); color:#fff !important; padding:9px 18px;
+    border-radius:var(--radius); font-size:.9rem;
+  }
+  .nav-cta::after{display:none;}
+  .nav-toggle{display:none; background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:90px 24px 80px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero-logo{max-width:380px; margin:0 auto 28px;}
+  .hero h1{
+    font-size:clamp(1.8rem, 4vw, 2.7rem);
+    max-width:780px; margin:0 auto .5em;
+    line-height:1.25;
+  }
+  .hero p.lead{
+    max-width:560px; margin:0 auto 32px; font-size:1.08rem; color:#3a352c;
+  }
+  .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:13px 26px;
+    border-radius:var(--radius);
+    font-weight:600;
+    font-size:.95rem;
+    border:1.5px solid var(--olive);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn-primary{background:var(--olive); color:#fff;}
+  .btn-primary:hover{background:var(--olive-dark); transform:translateY(-2px);}
+  .btn-outline{background:transparent; color:var(--olive);}
+  .btn-outline:hover{background:var(--olive); color:#fff; transform:translateY(-2px);}
+
+  /* ---------- Sections generic ---------- */
+  section{position:relative; padding:80px 0;}
+  section.alt{background:var(--linen-soft);}
+  .section-head{max-width:640px; margin:0 auto 48px; text-align:center;}
+  .section-head p{color:#4a4438; font-size:1.02rem;}
+
+  /* ---------- Trust strip ---------- */
+  .trust-strip{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
+    margin-top:36px;
+  }
+  .trust-pill{
+    background:var(--white);
+    border:1px solid rgba(31,27,22,0.1);
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:.88rem;
+    display:flex; align-items:center; gap:8px;
+    font-weight:500;
+  }
+  .trust-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); flex:none;}
+
+  /* ---------- Categories grid ---------- */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:22px;
+  }
+  .cat-card{
+    background:var(--white);
+    border:1px solid rgba(31,27,22,0.08);
+    padding:30px 26px;
+    border-radius:var(--radius);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .cat-card:hover{transform:translateY(-4px); box-shadow:0 14px 30px -18px rgba(31,27,22,.35);}
+  .cat-card .tag{
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--olive); font-weight:700; margin-bottom:10px; display:block;
+  }
+  .cat-card h3{font-size:1.18rem; margin-bottom:.3em;}
+  .cat-card p{font-size:.92rem; color:#4a4438; margin:0;}
+
+  /* ---------- Corporate section ---------- */
+  .corp-layout{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:flex-start;
+  }
+  .corp-points{list-style:none; margin:0 0 30px; padding:0;}
+  .corp-points li{
+    display:flex; gap:14px; padding:14px 0; border-bottom:1px solid rgba(31,27,22,.08);
+  }
+  .corp-points li:last-child{border-bottom:none;}
+  .corp-points .mark{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    background:var(--olive); color:#fff; font-size:.85rem;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+  .corp-points strong{display:block; margin-bottom:2px;}
+  .corp-points span{font-size:.92rem; color:#4a4438;}
+
+  .quote-card{
+    background:var(--olive); color:#fff;
+    padding:36px 30px; border-radius:var(--radius);
+  }
+  .quote-card h3{color:#fff; font-size:1.3rem;}
+  .quote-card p{color:#e7e4d8; font-size:.93rem;}
+  .quote-card form{margin-top:18px; display:flex; flex-direction:column; gap:12px;}
+  .quote-card input, .quote-card select, .quote-card textarea{
+    width:100%; padding:11px 13px; border-radius:var(--radius);
+    border:none; font-family:inherit; font-size:.92rem;
+    background:rgba(255,255,255,.95);
+  }
+  .quote-card textarea{resize:vertical; min-height:80px;}
+  .quote-card .btn-primary{background:var(--gold); border-color:var(--gold); margin-top:4px;}
+  .quote-card .btn-primary:hover{background:#a07526;}
+
+  /* ---------- Process (real sequence -> stitch markers ok) ---------- */
+  .process{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:0;
+    position:relative;
+  }
+  .process-step{
+    padding:0 18px; text-align:center; position:relative;
+  }
+  .process-step .stitch-icon{
+    width:46px; height:46px; margin:0 auto 16px;
+    border:1.5px dashed var(--gold);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; color:var(--olive);
+  }
+  .process-step h4{font-size:1rem; margin-bottom:6px; font-family:'Work Sans'; font-weight:700;}
+  .process-step p{font-size:.86rem; color:#4a4438;}
+
+  /* ---------- Gallery / social ---------- */
+  .social-block{
+    display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin-top:10px;
+  }
+  .social-card{
+    background:var(--white); border:1px solid rgba(31,27,22,.08);
+    padding:24px 30px; border-radius:var(--radius);
+    display:flex; align-items:center; gap:16px;
+    min-width:260px;
+  }
+  .social-card .ic{
+    width:44px; height:44px; border-radius:50%; background:var(--olive);
+    display:flex; align-items:center; justify-content:center;
+    flex:none; overflow:hidden;
+  }
+  .social-card .ic img{width:24px; height:24px; object-fit:contain; filter:brightness(0) invert(1);}
+  .social-card h4{margin:0 0 2px; font-size:1rem; font-family:'Work Sans'; font-weight:700;}
+  .social-card a{font-size:.88rem;}
+
+  /* ---------- About ---------- */
+  .about-layout{
+    display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;
+  }
+  .about-quote{
+    font-family:'Fraunces', serif; font-size:1.35rem; font-style:italic;
+    color:var(--olive-dark); border-left:3px solid var(--gold); padding-left:20px;
+    margin:0 0 20px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px;
+  }
+  .contact-card{
+    background:var(--white); border:1px solid rgba(31,27,22,.08);
+    padding:28px 24px; border-radius:var(--radius); text-align:center;
+  }
+  .contact-card .ic2{font-size:1.6rem; margin-bottom:10px;}
+  .contact-card .ic2 img{width:30px; height:30px; object-fit:contain; margin:0 auto;}
+  .btn-icon{display:inline-flex; align-items:center; gap:9px;}
+  .btn-icon img{width:18px; height:18px; object-fit:contain;}
+  .btn-primary .btn-icon img{filter:brightness(0) invert(1);}
+  .contact-card h4{margin:0 0 6px; font-size:1.02rem;}
+  .contact-card p{font-size:.88rem; color:#4a4438; margin:0 0 10px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink); color:#cfc9ba; padding:46px 0 26px; text-align:center;
+  }
+  footer img{height:34px; margin:0 auto 14px; filter:invert(1);}
+  footer p{font-size:.85rem; margin:4px 0;}
+  footer a{color:#e8d9a8;}
+  .foot-links{display:flex; gap:18px; justify-content:center; margin:14px 0; flex-wrap:wrap; align-items:center;}
+  .foot-links a{display:inline-flex; align-items:center; gap:8px;}
+  .foot-links img{width:20px; height:20px; object-fit:contain; filter:brightness(0) invert(1);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .corp-layout, .about-layout{grid-template-columns:1fr;}
+    .nav-links{
+      position:fixed; top:64px; right:0; left:0; background:var(--linen);
+      flex-direction:column; padding:20px 24px; gap:18px;
+      border-bottom:1px solid rgba(31,27,22,.08);
+      transform:translateY(-110%); transition:transform .25s ease;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+    .about-layout > div:last-child{order:-1;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 18px;}
+    section{padding:56px 0;}
+    .hero{padding:56px 18px 56px;}
+    .hero-logo, .nav-logo img{height:34px;}
+    .hero h1{font-size:1.55rem; line-height:1.3;}
+    .hero p.lead{font-size:.98rem;}
+    .hero-ctas{flex-direction:column; width:100%; gap:12px;}
+    .hero-ctas .btn{width:100%; text-align:center;}
+    .trust-strip{gap:10px;}
+    .trust-pill{font-size:.8rem; padding:8px 14px;}
+    .section-head h2{font-size:1.5rem;}
+    .section-head p{font-size:.94rem;}
+    .cat-grid{grid-template-columns:1fr;}
+    .cat-card{padding:24px 20px;}
+    .corp-layout{gap:34px;}
+    .quote-card{padding:26px 22px;}
+    .process{grid-template-columns:1fr 1fr; row-gap:30px;}
+    .social-block{flex-direction:column; align-items:stretch;}
+    .social-card{min-width:0;}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav{padding:12px 18px;}
+    footer{padding:36px 0 20px;}
+    .foot-links{gap:14px;}
+    .btn{padding:14px 22px; font-size:1rem;}
+  }
+  @media (max-width:380px){
+    .process{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#inicio" class="nav-logo"><img src="assets/logo.png" alt="Handmade by Sue"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#categorias">Regalos</a>
+      <a href="#corporativo">Empresas y colegios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto" class="nav-cta">Contáctanos</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <h1>Regalos hechos a mano, pensados para alguien en especial</h1>
+  <p class="lead">Creamos regalos artesanales y personalizados en Costa Rica — grabado láser, madera, bolsos y detalles corporativos — con cuidado en cada puntada y cada pieza.</p>
+  <div class="hero-ctas">
+    <a href="https://wa.me/50688316855?text=Hola%2C%20vengo%20de%20la%20pagina%20handmadebysuecr.com%2C%20tengo%20una%20consulta%20acerca%20de%20sus%20productos." class="btn btn-primary btn-icon"><img src="assets/Whatsapp%20Logo.png" alt="">Escribir por WhatsApp</a>
+    <a href="#corporativo" class="btn btn-outline">Soy empresa o colegio</a>
+  </div>
+  <div class="trust-strip">
+    <div class="trust-pill"><span class="dot"></span> Inscritos en el Ministerio de Hacienda</div>
+    <div class="trust-pill"><span class="dot"></span> Factura electrónica</div>
+    <div class="trust-pill"><span class="dot"></span> Hecho en Costa Rica</div>
+  </div>
+</section>
+
+<section id="nosotros" class="alt">
+  <div class="wrap about-layout">
+    <div>
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>Cada producto lleva una intención</h2>
+      <p class="about-quote">"No hacemos objetos en serie. Hacemos regalos que alguien va a guardar."</p>
+      <p>Handmade by Sue nació de una pasión por crear cosas con las manos y un cuidado especial por los detalles. Desde grabados en madera hasta bolsos personalizados, cada pieza se hace pensando en la persona que la va a recibir — ya sea para una boda, un baby shower, una fecha especial de colegio o un reconocimiento corporativo.</p>
+      <p>Hoy trabajamos con familias, escuelas y empresas costarricenses que buscan algo distinto a un regalo genérico.</p>
+    </div>
+    <div>
+      <img src="assets/logo.png" alt="Handmade by Sue - aguja e hilo" style="max-width:320px;margin:0 auto;">
+    </div>
+  </div>
+</section>
+
+<section id="categorias">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Lo que hacemos</span>
+      <h2>Regalos para cada ocasión</h2>
+      <p>Personalizamos con nombres, logos, fotos, mensajes o arte propio.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <span class="tag">Insignia</span>
+        <h3>Grabado láser en madera</h3>
+        <p>Letreros, tablas y detalles grabados con nombres, fechas o mensajes especiales.</p>
+      </div>
+      <div class="cat-card">
+        <span class="tag">Bodas</span>
+        <h3>Recuerdos y regalos de boda</h3>
+        <p>Sets a juego para la fiesta nupcial, con tiempos de entrega claros para grupos grandes.</p>
+      </div>
+      <div class="cat-card">
+        <span class="tag">Bebés</span>
+        <h3>Regalos para baby shower</h3>
+        <p>Placas con nombre, mantitas y detalles para recibir a los más pequeños.</p>
+      </div>
+      <div class="cat-card">
+        <span class="tag">Hogar</span>
+        <h3>Decoración personalizada</h3>
+        <p>Piezas para el hogar con un toque artesanal y personal.</p>
+      </div>
+      <div class="cat-card">
+        <span class="tag">Bolsos</span>
+        <h3>Tote bags y bolsos de tela</h3>
+        <p>Hechos a mano, personalizables con nombre, frase o diseño.</p>
+      </div>
+      <div class="cat-card">
+        <span class="tag">Temporada</span>
+        <h3>Navidad y fechas especiales</h3>
+        <p>Ornamentos y detalles de temporada, ideales para regalar o coleccionar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="corporativo" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Empresas, escuelas e instituciones</span>
+      <h2>Regalos corporativos con respaldo formal</h2>
+      <p>Trabajamos pedidos personalizados de volumen — desde lanyards y lapiceros hasta vasos de vino y bolsos con su logo.</p>
+    </div>
+    <div class="corp-layout">
+      <div>
+        <ul class="corp-points">
+          <li>
+            <div class="mark">✓</div>
+            <div><strong>Factura electrónica</strong><span>Estamos inscritos ante el Ministerio de Hacienda, por lo que su departamento de compras puede procesar la compra de forma completamente formal.</span></div>
+          </li>
+          <li>
+            <div class="mark">✓</div>
+            <div><strong>Personalización con su logo</strong><span>Cada pieza puede llevar el logo, nombre o mensaje de su empresa o institución.</span></div>
+          </li>
+          <li>
+            <div class="mark">✓</div>
+            <div><strong>Pedidos de volumen</strong><span>Trabajamos desde decenas hasta cientos de unidades. Mientras más anticipación tengamos, mejor precio y disponibilidad.</span></div>
+          </li>
+          <li>
+            <div class="mark">✓</div>
+            <div><strong>Experiencia con escuelas y empresas</strong><span>Hemos trabajado regalos para Día de la Madre, Día del Padre, Día del Maestro, fin de año y eventos corporativos.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="quote-card">
+        <h3>Solicitar cotización</h3>
+        <p>Cuéntenos qué necesitan y nos pondremos en contacto a la brevedad.</p>
+        <form action="https://formsubmit.co/ventas@handmadebysuecr.com" method="POST">
+          <input type="text" name="nombre" placeholder="Nombre / Institución" required>
+          <input type="email" name="correo" placeholder="Correo electrónico" required>
+          <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp">
+          <select name="tipo">
+            <option value="">¿Qué tipo de pedido necesita?</option>
+            <option value="Regalo corporativo">Regalo corporativo</option>
+            <option value="Regalo para colegio">Regalo para colegio</option>
+            <option value="Regalo personal">Regalo personal / individual</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <textarea name="mensaje" placeholder="Cuéntenos cantidad aproximada y fecha que necesitan"></textarea>
+          <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la idea al regalo terminado</h2>
+    </div>
+    <div class="process">
+      <div class="process-step">
+        <div class="stitch-icon">1</div>
+        <h4>Cuéntenos su idea</h4>
+        <p>Por WhatsApp, correo o formulario — cantidad, fecha y tipo de personalización.</p>
+      </div>
+      <div class="process-step">
+        <div class="stitch-icon">2</div>
+        <h4>Cotización y muestra</h4>
+        <p>Le enviamos precio claro y, si aplica, una vista previa del diseño.</p>
+      </div>
+      <div class="process-step">
+        <div class="stitch-icon">3</div>
+        <h4>Producción a mano</h4>
+        <p>Cada pieza se hace y revisa con cuidado antes de salir de taller.</p>
+      </div>
+      <div class="process-step">
+        <div class="stitch-icon">4</div>
+        <h4>Entrega</h4>
+        <p>Coordinamos entrega o retiro, con factura electrónica incluida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nuestro trabajo</span>
+      <h2>Véalo con sus propios ojos</h2>
+      <p>Seguimos publicando trabajos terminados en nuestras redes — la mejor forma de ver calidad y variedad real.</p>
+    </div>
+    <div class="social-block">
+      <div class="social-card">
+        <div class="ic"><img src="assets/Facebook%20Logo.png" alt="Facebook"></div>
+        <div>
+          <h4>Facebook</h4>
+          <a href="https://www.facebook.com/handmadebysuecr" target="_blank" rel="noopener">facebook.com/handmadebysuecr</a>
+        </div>
+      </div>
+      <div class="social-card">
+        <div class="ic"><img src="assets/Instagram%20Logo.png" alt="Instagram"></div>
+        <div>
+          <h4>Instagram</h4>
+          <a href="https://www.instagram.com/hand.madebysue/" target="_blank" rel="noopener">@hand.madebysue</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hablemos</span>
+      <h2>Contáctenos</h2>
+      <p>Respondemos rápido por WhatsApp — también puede escribirnos por correo.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="ic2"><img src="assets/Whatsapp%20Logo.png" alt="WhatsApp"></div>
+        <h4>WhatsApp</h4>
+        <p>La forma más rápida de cotizar</p>
+        <a href="https://wa.me/50688316855?text=Hola%2C%20vengo%20de%20la%20pagina%20handmadebysuecr.com%2C%20tengo%20una%20consulta%20acerca%20de%20sus%20productos." target="_blank" rel="noopener">Escribir ahora</a>
+      </div>
+      <div class="contact-card">
+        <div class="ic2">✉️</div>
+        <h4>Correo</h4>
+        <p>Para solicitudes formales o corporativas</p>
+        <a href="mailto:ventas@handmadebysuecr.com">ventas@handmadebysuecr.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="ic2">📍</div>
+        <h4>Ubicación</h4>
+        <p>Heredia, Costa Rica</p>
+        <a href="#corporativo">Pedidos por toda Costa Rica</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/logo.png" alt="Handmade by Sue">
+  <div class="foot-links">
+    <a href="https://www.facebook.com/handmadebysuecr" target="_blank" rel="noopener"><img src="assets/Facebook%20Logo.png" alt="">Facebook</a>
+    <a href="https://www.instagram.com/hand.madebysue/" target="_blank" rel="noopener"><img src="assets/Instagram%20Logo.png" alt="">Instagram</a>
+    <a href="mailto:ventas@handmadebysuecr.com">Correo</a>
+  </div>
+  <p>© <span id="year"></span> Handmade by Sue — Hecho a mano en Costa Rica.</p>
+  <p>Inscritos ante el Ministerio de Hacienda · Factura electrónica</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
